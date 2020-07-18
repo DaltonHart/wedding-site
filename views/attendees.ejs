@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSVP</title>
+    <!-- UIkit CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css"
+    />
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"></script>
+
+    <link rel="stylesheet" href="/styles/attendees.css" />
+  </head>
+  <body>
+    <h1>Total Attendees: <%= attendees.length %></h1>
+
+    <table class="uk-table uk-table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Attending</th>
+          <th>Plus One</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% attendees.forEach(attendee => { %>
+        <!-- row -->
+        <tr>
+          <td>
+            <%= attendee.name %>
+          </td>
+          <td>
+            <%= attendee.email %>
+          </td>
+          <td>
+            <% if (attendee.status) { %> Yes <% } else { %> No <% } %>
+          </td>
+          <td>
+            <% if (attendee.plusOne) { %> <% attendee.plusOneName %> <% } else {
+            %> No <% } %>
+          </td>
+        </tr>
+
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>

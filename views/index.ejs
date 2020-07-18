@@ -4,10 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RSVP</title>
+
+    <script src="/scripts/app.js" defer></script>
+
+    <!-- UIkit CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css"
+    />
+
+    <!-- UIkit JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"
+      defer
+    ></script>
+
     <link rel="stylesheet" href="/styles/main.css" />
-    <script src="/scripts/app.js"></script>
   </head>
   <body>
-    <h1>Wedding RSVP</h1>
+    <img
+      class="uk-animation-stroke"
+      src="/images/reindeer.svg"
+      uk-svg="stroke-animation: true"
+    />
+    <button id="rsvp" class="uk-button">RSVP</button>
+    <form class="uk-grid-small" id="rsvp__form" uk-grid></form>
   </body>
 </html>
