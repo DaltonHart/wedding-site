@@ -29,15 +29,23 @@ function displayForm(event) {
   emailInput.id = "email";
   emailInput.classList = ["uk-input"];
   rsvp__form.insertAdjacentElement("beforeend", emailInput);
-  // attend buttons
+  // attend button
   const attendButton = document.createElement("button");
   attendButton.innerText = "Attending";
   attendButton.classList = ["uk-button uk-button-primary uk-width-1-2@s"];
+  attendButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    setAttend(true);
+  });
+  // not attending button
   const notAttendButton = document.createElement("button");
   notAttendButton.innerText = "Not Attending";
   notAttendButton.classList = ["uk-button uk-button-danger uk-width-1-2@s"];
-  attendButton.addEventListener("click", () => setAttend(true));
-  notAttendButton.addEventListener("click", () => setAttend(false));
+  notAttendButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    setAttend(false);
+  });
+
   rsvp__form.insertAdjacentElement("beforeend", attendButton);
   rsvp__form.insertAdjacentElement("beforeend", notAttendButton);
 }
