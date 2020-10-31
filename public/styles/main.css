@@ -7,42 +7,119 @@
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin: 0;
   padding: 0;
   height: 100vh;
   overflow: hidden;
-  background-color: #2b2d36;
+  background: #1c92d2; /* fallback for old browsers */
+  background: -webkit-radial-gradient(
+    circle,
+    #135d85,
+    #062130
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: radial-gradient(
+    circle,
+    #135d85,
+    #062130
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #rsvp__form {
   max-width: 500px;
   position: relative;
   z-index: 10;
+  margin-top: 100px;
 }
 
-button {
+#rsvp {
   position: relative;
   z-index: 10;
+  width: 250px;
+  height: 100px;
+  margin-top: 50px;
+  font-size: 50px;
 }
 
 .uk-animation-stroke {
-  position: absolute;
-  bottom: -20%;
-  width: 80%;
-  max-width: 1100px;
-  z-index: 1;
-  animation-duration: 8s;
-  fill: #393d50;
-  stroke: #313c74;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  width: 100%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  animation-duration: 20s;
+}
+
+path {
+  stroke: #c4e0e534 !important;
+  fill: #8fa2a51c !important;
 }
 
 .header_name {
   color: whitesmoke;
-  position: absolute;
-  top: 150px;
+  /* position: absolute; */
+  /* top: 150px; */
   font-size: 9rem;
   z-index: 10;
   font-family: "Mr Dafoe", cursive;
+  margin: 20px 0;
+  margin-top: 100px;
+}
+
+.header_date {
+  color: whitesmoke;
+  /* position: absolute; */
+  /* top: 300px; */
+  font-size: 3rem;
+  z-index: 10;
+  /* font-family: "Mr Dafoe", cursive; */
+  margin: 5px 0;
+}
+
+.header_location {
+  color: whitesmoke;
+  /* position: absolute;
+  top: 350px; */
+  font-size: 2rem;
+  z-index: 10;
+  margin: 5px 0;
+}
+
+.flowers_left {
+  position: absolute;
+  top: -50px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+  left: -800px;
+}
+
+.flowers_right {
+  position: absolute;
+  right: -800px;
+  top: -50px;
+  transform: scaleX(-1);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.flowers {
+  z-index: 10;
+}
+
+.flowers_left.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+  left: -300px;
+}
+
+.flowers_right.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+  right: -300px;
 }

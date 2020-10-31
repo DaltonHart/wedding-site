@@ -66,3 +66,10 @@ function setAttend(value) {
       console.log(json);
     });
 }
+
+setTimeout(function () {
+  const flowers = document.querySelectorAll(".flowers");
+  flowers.forEach((flower) => {
+    flower.classList.add("visible");
+  });
+}, 1000);
