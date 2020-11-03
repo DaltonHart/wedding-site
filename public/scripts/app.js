@@ -7,8 +7,7 @@ const formData = {
   name: "",
   email: "",
   status: false,
-  plusOne: false,
-  plusOneName: "",
+  additions: [],
 };
 
 rsvpBtn.addEventListener("click", displayForm);
@@ -20,19 +19,55 @@ function displayForm(event) {
   nameInput.placeholder = "Name";
   nameInput.type = "text";
   nameInput.id = "name";
-  nameInput.classList = ["uk-input"];
+  nameInput.classList = ["uk-input uk-form-large"];
   rsvp__form.insertAdjacentElement("beforeend", nameInput);
   // name input
   const emailInput = document.createElement("input");
   emailInput.placeholder = "Email";
   emailInput.type = "email";
   emailInput.id = "email";
-  emailInput.classList = ["uk-input"];
+  emailInput.classList = ["uk-input uk-form-large"];
   rsvp__form.insertAdjacentElement("beforeend", emailInput);
+
+  // Add additions
+  rsvp__form.insertAdjacentHTML(
+    "beforeend",
+    `<p class="form__text">To add another person to your reservation please fill out the below input and hit the plus.</p>`
+  );
+  rsvp__form.insertAdjacentHTML(
+    "beforeend",
+    `<div class="uk-inline">
+            <a id="add_one" class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: plus"></a>
+            <input class="uk-input uk-form-large" type="text" id="addition" placeholder="Name of Plus One">
+        </div>
+        <div id="addition_cards"></div>`
+  );
+
+  document.getElementById("add_one").addEventListener("click", function (e) {
+    const name = document.getElementById("addition").value;
+    formData.additions.push({ name });
+    console.log(formData);
+    renderAdditions();
+  });
+
+  function renderAdditions() {
+    document.getElementById("addition_cards").innerHTML = "";
+    formData.additions.forEach((addition) => {
+      document
+        .getElementById("addition_cards")
+        .insertAdjacentHTML(
+          "beforeend",
+          `<span class="uk-label uk-label-success">${addition.name} <a href="" class="addition__remove">X</a> </span>`
+        );
+    });
+  }
+
   // attend button
   const attendButton = document.createElement("button");
   attendButton.innerText = "Attending";
-  attendButton.classList = ["uk-button uk-button-primary uk-width-1-2@s"];
+  attendButton.classList = [
+    "uk-button uk-button-large uk-button-primary uk-width-1-1 uk-margin-small-top",
+  ];
   attendButton.addEventListener("click", (e) => {
     e.preventDefault();
     setAttend(true);
@@ -40,7 +75,9 @@ function displayForm(event) {
   // not attending button
   const notAttendButton = document.createElement("button");
   notAttendButton.innerText = "Not Attending";
-  notAttendButton.classList = ["uk-button uk-button-danger uk-width-1-2@s"];
+  notAttendButton.classList = [
+    "uk-button uk-button-large uk-button-danger uk-width-1-1",
+  ];
   notAttendButton.addEventListener("click", (e) => {
     e.preventDefault();
     setAttend(false);

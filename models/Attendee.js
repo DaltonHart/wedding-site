@@ -7,8 +7,7 @@ module.exports = mongoose.model(
       name: { type: String, required: true },
       email: { type: String, required: true },
       status: { type: Boolean, required: true },
-      plusOne: { type: Boolean },
-      plusOneName: { type: String },
+      additions: [{ name: String }],
     },
     { timestamps: true }
   )

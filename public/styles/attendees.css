@@ -10,10 +10,46 @@ body {
   justify-content: flex-start;
   align-items: center;
   height: 100vh;
+  background: -webkit-radial-gradient(
+    circle,
+    #135d85,
+    #062130
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: radial-gradient(circle, #135d85, #062130);
+}
+
+h1 {
+  color: white;
+}
+
+table {
+  background-color: whitesmoke;
+}
+
+.uk-table th {
+  font-weight: bold;
+  color: black;
 }
 
 #rsvp__form {
   display: flex;
   flex-direction: column;
   max-width: 500px;
+}
+
+.additions {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.additions_sub {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.attendee {
+  background: rgba(0, 0, 0, 0.1);
+  border-top: 2px solid black;
+}
+
+tr:hover {
+  background-color: rgba(255, 255, 0, 0.192);
 }

@@ -17,37 +17,38 @@
     <link rel="stylesheet" href="/styles/attendees.css" />
   </head>
   <body>
-    <h1>Total Attendees: <%= attendees.length %></h1>
+    <h1>Total Attendees: <%= total %></h1>
 
-    <table class="uk-table uk-table-striped">
+    <table class="uk-table uk-table-responsive">
       <thead>
         <tr>
           <th>Name</th>
           <th>Email</th>
           <th>Attending</th>
-          <th>Plus One</th>
+          <!-- <th>Plus One</th> -->
         </tr>
       </thead>
       <tbody>
         <% attendees.forEach(attendee => { %>
         <!-- row -->
-        <tr>
-          <td>
-            <%= attendee.name %>
-          </td>
-          <td>
-            <%= attendee.email %>
-          </td>
-          <td>
-            <% if (attendee.status) { %> Yes <% } else { %> No <% } %>
-          </td>
-          <td>
-            <% if (attendee.plusOne) { %> <% attendee.plusOneName %> <% } else {
-            %> No <% } %>
-          </td>
+        <tr class="attendee">
+          <td><%= attendee.name %></td>
+          <td><%= attendee.email %></td>
+          <td><% if (attendee.status) { %> Yes <% } else { %> No <% } %></td>
         </tr>
-
-        <% }) %>
+        <% if (attendee.additions.length) { %>
+        <tr class="additions">
+          <th>Additions</th>
+          <td>Name</td>
+          <td></td>
+        </tr>
+        <% attendee.additions.forEach(addition => { %>
+        <tr class="additions_sub">
+          <td></td>
+          <td><%= addition.name %></td>
+          <td></td>
+        </tr>
+        <% }) %> <% } %> <% }) %>
       </tbody>
     </table>
   </body>

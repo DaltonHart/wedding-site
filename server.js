@@ -16,7 +16,13 @@ app.get("/", (req, res) => {
 app.get("/attendees", async (req, res) => {
   try {
     const attendees = await Attendee.find({});
-    res.render("attendees", { attendees });
+    let total = attendees.length;
+    attendees.forEach((attend) => {
+      if (attend.additions.length) {
+        total += attend.additions.length;
+      }
+    });
+    res.render("attendees", { attendees, total });
   } catch (err) {
     res.json({ err: err.message });
   }
