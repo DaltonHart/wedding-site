@@ -18,6 +18,9 @@ app.get("/attendees", async (req, res) => {
     const attendees = await Attendee.find({});
     let total = attendees.length;
     attendees.forEach((attend) => {
+      if (!attend.status) {
+        total -= 1;
+      }
       if (attend.additions.length) {
         total += attend.additions.length;
       }
