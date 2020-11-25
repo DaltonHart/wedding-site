@@ -1,4 +1,5 @@
 const express = require("express");
+const nodemailer = require("nodemailer");
 
 const app = express();
 require("dotenv").config();
@@ -42,7 +43,26 @@ app.post("/attendees", async (req, res) => {
 
 app.post("/email", async (req, res) => {
   try {
-    res.status(201).json({ sent: "sucess" });
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: req.body.email,
+      subject: "Thank you for your reservation!",
+      text:
+        "We are so excited to see you on April 17th, 2021 at 13616 E Bullard Ave Clovis,Ca.",
+    };
+
+    const success = await transporter.sendMail(mailOptions);
+    console.log("Email sent: " + success.response);
+
+    res.json({ email: "success" });
   } catch (err) {
     res.json({ err: err.message });
   }
