@@ -8,11 +8,16 @@ const formData = {
   email: "",
   status: false,
   additions: [],
+  errors: [],
 };
 
 rsvpBtn.addEventListener("click", displayForm);
 
 function displayForm(event) {
+  const h2s = document.querySelectorAll("h2");
+  h2s.forEach(h2 => {
+    h2.remove();
+  });
   rsvpBtn.parentNode.removeChild(rsvpBtn);
   // name input
   const nameInput = document.createElement("input");
@@ -38,7 +43,7 @@ function displayForm(event) {
     "beforeend",
     `<div class="uk-inline">
             <a id="add_one" class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: plus"></a>
-            <input class="uk-input uk-form-large" type="text" id="addition" placeholder="Name of Plus One">
+            <input class="uk-input uk-form-large" type="text" id="addition" placeholder="Name of Plus Ones">
         </div>
         <div id="addition_cards"></div>`
   );
@@ -46,18 +51,17 @@ function displayForm(event) {
   document.getElementById("add_one").addEventListener("click", function (e) {
     const name = document.getElementById("addition").value;
     formData.additions.push({ name });
-    console.log(formData);
     renderAdditions();
   });
 
   function renderAdditions() {
     document.getElementById("addition_cards").innerHTML = "";
-    formData.additions.forEach((addition) => {
+    formData.additions.forEach(addition => {
       document
         .getElementById("addition_cards")
         .insertAdjacentHTML(
           "beforeend",
-          `<span class="uk-label uk-label-success">${addition.name} <a href="" class="addition__remove">X</a> </span>`
+          `<span class="addition uk-label">${addition.name} <a href="" class="addition__remove">X</a> </span>`
         );
     });
   }
@@ -68,7 +72,7 @@ function displayForm(event) {
   attendButton.classList = [
     "uk-button uk-button-large uk-button-primary uk-width-1-1 uk-margin-small-top",
   ];
-  attendButton.addEventListener("click", (e) => {
+  attendButton.addEventListener("click", e => {
     e.preventDefault();
     setAttend(true);
   });
@@ -78,7 +82,7 @@ function displayForm(event) {
   notAttendButton.classList = [
     "uk-button uk-button-large uk-button-danger uk-width-1-1",
   ];
-  notAttendButton.addEventListener("click", (e) => {
+  notAttendButton.addEventListener("click", e => {
     e.preventDefault();
     setAttend(false);
   });
@@ -88,25 +92,62 @@ function displayForm(event) {
 }
 
 function setAttend(value) {
+  formData.errors = [];
   formData.status = value;
   formData.name = document.getElementById("name").value;
   formData.email = document.getElementById("email").value;
-  fetch("/attendees", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-    });
+
+  if (!formData.name) {
+    formData.errors.push("name");
+  }
+  if (!formData.email) {
+    formData.errors.push("email");
+  }
+
+  removeErrors(["name", "email"]);
+
+  if (formData.errors.length) {
+    return displayErrors(formData.errors);
+  } else {
+    fetch("/attendees", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(res => res.json())
+      .then(json => {
+        document.getElementById("rsvp__form").remove();
+        const thankyou = document.createElement("h2");
+        thankyou.classList = ["header_thanks"];
+        thankyou.innerText = "Thank you for joining us on our special day.";
+        document.body.appendChild(thankyou);
+      });
+  }
+}
+
+function displayErrors(errors) {
+  errors.forEach(error => {
+    document.getElementById(error).classList.add("uk-form-danger");
+  });
+}
+
+function removeErrors(errors) {
+  errors.forEach(error => {
+    document.getElementById(error).classList.remove("uk-form-danger");
+  });
 }
 
 setTimeout(function () {
   const flowers = document.querySelectorAll(".flowers");
-  flowers.forEach((flower) => {
+  flowers.forEach(flower => {
     flower.classList.add("visible");
   });
 }, 1000);
+
+setTimeout(function () {
+  const deer = document.querySelector(".uk-animation-stroke");
+  console.log(deer);
+  deer.classList.add("visible");
+}, 400);
