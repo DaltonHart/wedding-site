@@ -43,7 +43,7 @@ function displayForm(event) {
     "beforeend",
     `<div class="uk-inline">
             <a id="add_one" class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: plus"></a>
-            <input class="uk-input uk-form-large" type="text" id="addition" placeholder="Name of Plus Ones">
+            <input name="addition" class="uk-input uk-form-large" type="text" id="addition" placeholder="Name of Plus Ones">
         </div>
         <div id="addition_cards"></div>`
   );
