@@ -56,13 +56,20 @@ function displayForm(event) {
 
   function renderAdditions() {
     document.getElementById("addition_cards").innerHTML = "";
-    formData.additions.forEach(addition => {
+    formData.additions.forEach((addition, index) => {
       document
         .getElementById("addition_cards")
         .insertAdjacentHTML(
           "beforeend",
-          `<span class="addition uk-label">${addition.name} <a href="" class="addition__remove">X</a> </span>`
+          `<span class="addition uk-label">${addition.name} <a id="${index}" href="" class="addition__remove">X</a> </span>`
         );
+      document
+        .getElementById(index)
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          formData.additions.splice(event.target.id, 1);
+          renderAdditions();
+        });
     });
   }
 
