@@ -17,7 +17,7 @@ app.get("/attendees", async (req, res) => {
   try {
     const attendees = await Attendee.find({});
     let total = attendees.length;
-    attendees.forEach((attend) => {
+    attendees.forEach(attend => {
       if (!attend.status) {
         total -= 1;
       }
@@ -35,6 +35,14 @@ app.post("/attendees", async (req, res) => {
   try {
     const createdAttendee = await Attendee.create(req.body);
     res.status(201).json({ attendee: createdAttendee });
+  } catch (err) {
+    res.json({ err: err.message });
+  }
+});
+
+app.post("/email", async (req, res) => {
+  try {
+    res.status(201).json({ sent: "sucess" });
   } catch (err) {
     res.json({ err: err.message });
   }
