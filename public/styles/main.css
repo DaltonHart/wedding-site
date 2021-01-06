@@ -36,6 +36,31 @@ body {
   height: 100px;
   margin-top: 50px;
   font-size: 50px;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+  transition: visibility 1s linear, opacity 1s linear;
+}
+
+#registry {
+  position: relative;
+  z-index: 10;
+  width: 250px;
+  height: 50px;
+  margin-top: 10px;
+  font-size: 18px;
+  background-color: #23c375;
+  transition: visibility 1s linear, opacity 1s linear,
+    background-color 0.3s linear;
+  line-height: 50px;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+#registry:hover {
+  background-color: #1fa163;
 }
 
 .uk-animation-stroke {
@@ -64,7 +89,9 @@ path {
   z-index: 10;
   font-family: "Mr Dafoe", cursive;
   margin: 30px 0;
+  margin-bottom: 15px;
   margin-top: 100px;
+  text-shadow: 2px 2px 1px #11b4ff;
 }
 
 .header_date {
@@ -75,6 +102,7 @@ path {
   z-index: 10;
   /* font-family: "Mr Dafoe", cursive; */
   margin: 5px 0;
+  text-shadow: 2px 2px 1px #18a775;
 }
 
 .header_location {
@@ -85,6 +113,7 @@ path {
   z-index: 10;
   margin: 5px 0;
   text-align: center;
+  text-shadow: 2px 2px 1px #18a775;
 }
 
 .header_thanks {
@@ -96,6 +125,10 @@ path {
   font-size: 3rem;
   z-index: 10;
   text-align: center;
+  width: 80%;
+  background-color: #1f1f1fbf;
+  padding: 10px;
+  border-radius: 4px;
 }
 
 .flowers_left {
@@ -146,6 +179,10 @@ path {
   background: whitesmoke;
 }
 
+input {
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
 [class*="uk-inline"] {
   display: block;
 }
@@ -153,6 +190,9 @@ path {
 .form__text {
   color: white;
   line-height: 1em;
+  background-color: #1f1f1f;
+  padding: 5px;
+  margin-bottom: 0;
 }
 
 .uk-label {
@@ -160,6 +200,11 @@ path {
   margin-right: 10px;
   color: black;
   background: white;
+}
+
+.addition {
+  text-transform: none;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
 }
 
 .addition a {
@@ -173,6 +218,11 @@ path {
 
 .uk-form-danger {
   border: 4px solid;
+}
+
+.uk-button {
+  border-radius: 4px;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
 }
 
 .flowers_top {

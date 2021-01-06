@@ -1,6 +1,8 @@
 console.log("Wedding bells ringing..");
 
 const rsvpBtn = document.getElementById("rsvp");
+const registryBtn = document.getElementById("registry");
+
 const rsvp__form = document.getElementById("rsvp__form");
 
 const formData = {
@@ -18,6 +20,7 @@ function displayForm(event) {
   h2s.forEach(h2 => {
     h2.remove();
   });
+  registryBtn.style.display = "none";
   rsvpBtn.parentNode.removeChild(rsvpBtn);
   // name input
   const nameInput = document.createElement("input");
@@ -50,7 +53,9 @@ function displayForm(event) {
 
   document.getElementById("add_one").addEventListener("click", function (e) {
     const name = document.getElementById("addition").value;
+    if (name === "") return;
     formData.additions.push({ name });
+    document.getElementById("addition").value = "";
     renderAdditions();
   });
 
@@ -125,11 +130,25 @@ function setAttend(value) {
     })
       .then(res => res.json())
       .then(json => {
+        console.log("sent");
+        console.log(json);
         document.getElementById("rsvp__form").remove();
         const thankyou = document.createElement("h2");
         thankyou.classList = ["header_thanks"];
-        thankyou.innerText = "Thank you for joining us on our special day.";
+        thankyou.innerText = formData.status
+          ? "Thank you for your response and we can not wait for you to join us."
+          : "Thank you for your response and we hope that we will be able to see you soon.";
+        registryBtn.style.display = "inline-block";
         document.body.appendChild(thankyou);
+        fetch("/email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: json.attendee.email }),
+        })
+          .then(res => res.json())
+          .then(json => console.log(json));
       });
   }
 }
@@ -151,10 +170,14 @@ setTimeout(function () {
   flowers.forEach(flower => {
     flower.classList.add("visible");
   });
-}, 1000);
+}, 500);
 
 setTimeout(function () {
   const deer = document.querySelector(".uk-animation-stroke");
-  console.log(deer);
   deer.classList.add("visible");
 }, 400);
+
+setTimeout(function () {
+  rsvpBtn.classList.add("visible");
+  registryBtn.classList.add("visible");
+}, 2300);

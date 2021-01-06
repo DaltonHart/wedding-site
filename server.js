@@ -1,6 +1,8 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 
+const emailTemplate = require("./emailtemplate");
+
 const app = express();
 require("dotenv").config();
 
@@ -55,8 +57,7 @@ app.post("/email", async (req, res) => {
       from: process.env.EMAIL_USER,
       to: req.body.email,
       subject: "Thank you for your reservation!",
-      text:
-        "We are so excited to see you on April 17th, 2021 at 13616 E Bullard Ave Clovis,Ca.",
+      html: emailTemplate,
     };
 
     const success = await transporter.sendMail(mailOptions);
