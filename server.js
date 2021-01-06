@@ -66,6 +66,7 @@ app.post("/email", async (req, res) => {
     res.json({ email: "success" });
   } catch (err) {
     res.json({ err: err.message });
+    console.log(err);
   }
 });
 
