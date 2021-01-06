@@ -44,6 +44,7 @@ app.post("/attendees", async (req, res) => {
 });
 
 app.post("/email", async (req, res) => {
+  console.log(process.env.EMAIL_PASS, process.env.EMAIL_USER);
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
