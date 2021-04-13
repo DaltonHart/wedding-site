@@ -2,6 +2,7 @@ console.log("Wedding bells ringing..");
 
 const rsvpBtn = document.getElementById("rsvp");
 const registryBtn = document.getElementById("registry");
+const liveBtn = document.getElementById("livestream");
 
 const rsvp__form = document.getElementById("rsvp__form");
 
@@ -180,4 +181,5 @@ setTimeout(function () {
 setTimeout(function () {
   rsvpBtn.classList.add("visible");
   registryBtn.classList.add("visible");
+  liveBtn.classList.add("visible");
 }, 2300);
